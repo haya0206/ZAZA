@@ -2,6 +2,7 @@ package com.justhand.appjam.zaza;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -115,72 +116,56 @@ public class ProfileInActivity extends AppCompatActivity {
 
                 mSocket.emit("listSend",nameonly);
 
-                Emitter.Listener getList = new Emitter.Listener() {
+                //Emitter.Listener getList =
+                mSocket.on("list", new Emitter.Listener() {
                     @Override
                     public void call(Object... args) {
                         try {
-
                             JSONObject users = (JSONObject) args[0];
                             Iterator<String> temp = users.keys();
-
                             userModel = new ArrayList<user_model>();
                             while (temp.hasNext()) {
                                 String key = temp.next();
-                                //String value = users.get(key).toString();
-
-                                //value를 파싱하는 작업이 필요하다
                                 JSONObject userjson = new JSONObject(users.get(key).toString());
-
                                 Log.e("value check : ",userjson.get("name").toString());
+                                String name = userjson.get("name").toString();
 
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(getApplicationContext(), "Haha !! All rats are   killed !", Toast.LENGTH_SHORT).show();
 
-                                        //whatever your UI logic
-                                    }
-                                });
-                                //
-
-                                user_model e = new user_model();
-
-                                e.setName(userjson.get("name").toString());
-                                e.setAge(userjson.get("age").toString());
-                                e.setBio(userjson.get("bio").toString());
-                                e.setMy_gender(userjson.get("my_gender").toString());
-                                e.setTaste_gender(userjson.get("taste_gender").toString());
-
+                                user_model e = new user_model(
+                                        userjson.get("name").toString(),
+                                        userjson.get("age").toString(),
+                                        userjson.get("bio").toString(),
+                                        userjson.get("my_gender").toString(),
+                                        userjson.get("taste_gender").toString()
+                                );
                                 userModel.add(e);
+                                userModel.size();
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        userModel.size();
+
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("Users", (Serializable) userModel);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+                        mSocket.close();
+                        finish();
                     }
-                };
-                mSocket.on("list", getList);
+                });
 
-
-
-                mSocket.close();
-
+/*
+                userModel.size();
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("Users", "lll");
+                intent.putExtra("Users", (Parcelable) userModel);
                 startActivity(intent);
                 overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-                finish();
+                finish();*/
             }
         });
-
-
-
-
-
-
-
-
 
     }
 }
