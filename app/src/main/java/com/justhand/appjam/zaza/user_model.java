@@ -1,23 +1,29 @@
 package com.justhand.appjam.zaza;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 public class user_model implements Serializable{
     @SerializedName("name")
+    @Expose
     private String name;
 
     @SerializedName("age")
+    @Expose
     private String age;
 
     @SerializedName("bio")
+    @Expose
     private String bio;
 
     @SerializedName("my_gender")
+    @Expose
     private String my_gender;
 
     @SerializedName("taste_gender")
+    @Expose
     private String taste_gender;
 
     public user_model(String name, String age, String bio, String my_gender, String taste_gender){

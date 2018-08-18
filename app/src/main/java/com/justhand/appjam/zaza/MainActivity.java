@@ -1,5 +1,6 @@
 package com.justhand.appjam.zaza;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 import com.justhand.appjam.zaza.model.near_user;
 import com.justhand.appjam.zaza.model.send_myinfo;
+import com.mindorks.placeholderview.SwipeDecor;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,23 +34,41 @@ public class MainActivity extends AppCompatActivity {
     Button zanibutton;
     //io.socket.client.Socket mSocket;
 
+    private SwipePlaceHolderView mSwipeView;
+    private Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        final TextView testtext = findViewById(R.id.testtext);
         ArrayList<user_model> list = (ArrayList<user_model>) intent.getSerializableExtra("Users");
 
-        for(user_model a : list){
-            testtext.setText(a.getName());
+
+        mSwipeView = (SwipePlaceHolderView)findViewById(R.id.swipeView);
+        mContext = getApplicationContext();
+
+        mSwipeView.getBuilder()
+                .setDisplayViewCount(3)
+                .setSwipeDecor(new SwipeDecor()
+                        .setPaddingTop(20)
+                        .setRelativeScale(0.01f)
+                        .setSwipeInMsgLayoutId(R.layout.tinder_swipe_in_msg_view)
+                        .setSwipeOutMsgLayoutId(R.layout.tinder_swipe_out_msg_view));
+
+        //여기를 수정해줍시다.
+        /*
+        for(user_model profile : Utils.loadProfiles(this.getApplicationContext())){
+            mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
         }
-        Toast.makeText(getApplicationContext(),"fuck",Toast.LENGTH_SHORT);
-
-
-
+        */
+        for(user_model profile : list){
+            mSwipeView.addView(new TinderCard(mContext, profile, mSwipeView));
+        }
 
 
 

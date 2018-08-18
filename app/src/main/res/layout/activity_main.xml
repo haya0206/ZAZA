@@ -5,19 +5,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- 여기에 스토리 사진, 틴더뷰 넣자. 그리고 상단바는 프래그먼트 -->
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@id/zanibutton"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintLeft_toLeftOf="@id/circle2"
+        app:layout_constraintRight_toRightOf="@id/circle1"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="이런, 상대를 모두 넘겨버렸어요!"
+            android:textAlignment="center"
+            android:paddingTop="200dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:orientation="horizontal">
+        </LinearLayout>
+        <com.mindorks.placeholderview.SwipePlaceHolderView
+            android:id="@+id/swipeView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/colorPrimary"/>
+    </FrameLayout>
+
+    <!--
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/testtext"
     android:text="asdfasdf"
     app:layout_constraintTop_toTopOf="@+id/zanibutton"/>
-
+-->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/circle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginLeft="5dp"
         android:backgroundTint="#ffffff"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/zanibutton"
@@ -60,5 +95,4 @@
         app:layout_constraintEnd_toStartOf="@+id/zanibutton"
         app:layout_constraintTop_toTopOf="@+id/zanibutton" />
 
-    />
 </android.support.constraint.ConstraintLayout>
