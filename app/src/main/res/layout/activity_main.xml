@@ -5,6 +5,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- 여기에 스토리 사진, 틴더뷰 넣자. 그리고 상단바는 프래그먼트 -->
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/testtext"
+    android:text="asdfasdf"
+    app:layout_constraintTop_toTopOf="@+id/zanibutton"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/circle1"
