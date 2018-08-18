@@ -20,6 +20,7 @@
 
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".ProfileInActivity"></activity>
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

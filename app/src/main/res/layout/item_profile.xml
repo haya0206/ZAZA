@@ -2,6 +2,7 @@
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="128dp"
     android:layout_height="128dp"
-    android:src="@drawable/ic_launcher_background">
+    android:src="@drawable/ic_launcher_background"
+    android:id="@+id/profile_img">
 
 </ImageView>
